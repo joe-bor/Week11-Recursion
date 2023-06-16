@@ -48,26 +48,25 @@ function factorial(num, total = 1) {
 }
 // console.log(factorial(7));
 
-function fibonacci(arr = [1, 1], x = 0, num) {
+function fibonacci(n) {
   // This function returns the Nth number in the fibonacci sequence.
   // https://en.wikipedia.org/wiki/Fibonacci_number
   // For this function, the first two fibonacci numbers are 1 and 1
+  let fibArr = [1, 1];
+  let x = 0;
 
-  /*
-  create fib sequence, store them in the array
-  when array length is equal to num (input), return last element? 
-  */
+  function fibHelper(arr, n) {
+    if (n <= arr.length) return arr[n - 1];
+    let fib = fibArr[x] + fibArr[x + 1];
+    fibArr.push(fib);
+    x++;
+    return fibHelper(fibArr, n);
+  }
 
-  //base case
-  if (num <= arr.length) return arr[num - 1];
-
-  //action
-  const fib = [arr[x] + arr[x + 1]];
-
-  //recursive
-  return fibonacci(arr + fib, ++x, num);
+  return fibHelper(fibArr, n);
 }
-console.log(fibonacci(1));
+
+console.log(fibonacci(8));
 
 function coinFlips() {
   // This function returns an array of all possible outcomes from flipping a coin N times.
