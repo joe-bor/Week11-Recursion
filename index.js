@@ -68,14 +68,39 @@ function fibonacci(n) {
 
 console.log(fibonacci(8));
 
-function coinFlips() {
+function coinFlips(numFlips) {
   // This function returns an array of all possible outcomes from flipping a coin N times.
   // Input type: Integer
   // For example, coinFlips(2) would return the following:
   // ["HH", "HT", "TH", "TT"]
   // H stands for Heads and T stands for tails
   // Represent the two outcomes of each flip as "H" or "T"
+
+  let results = [];
+
+  function coinFlipsHelper(numFlips, combination) {
+    // base case
+    // if out of flips,
+    // push gathered combination to results
+    // then return results
+    // each 'branch' would return it's own
+    if (numFlips === 0) {
+      results.push(combination);
+      return results;
+    }
+
+    // recursive call
+    // n - 1 every time we flip to get to base case
+    // add 'H' to one branch, and  'T' to another
+    //TODO: How to not hard code 'H' and 'T' ? pass in an array of possible results and loop thru it?
+    coinFlipsHelper(numFlips - 1, combination + "H");
+    coinFlipsHelper(numFlips - 1, combination + "T");
+  }
+
+  return coinFlipsHelper(numFlips, "");
 }
+
+console.log(coinFlips(2));
 
 function letterCombinations() {
   // This function returns an array of all combinations of the given letters
